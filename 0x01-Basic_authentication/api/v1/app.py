@@ -30,6 +30,7 @@ def request_unauthorised(error) -> str:
     response.status_code = 401
     return response
 
+
 @app.errorhandler(403)
 def request_forbiden(error) -> str:
     """
