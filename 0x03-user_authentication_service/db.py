@@ -5,7 +5,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 
-from user import Base
+from user import Base, User
 
 
 class DB:
@@ -35,5 +35,6 @@ class DB:
         No validations are required at this stage.
         '''
         new_add = User(email=email, hashed_password=hashed_password)
-        self.session.add(new_add)
-        self.session.commit()
+        self._session.add(new_add)
+        self._session.commit()
+        return new_add
