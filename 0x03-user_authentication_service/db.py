@@ -34,7 +34,11 @@ class DB:
         returns a User object. The method should save the user to the database.
         No validations are required at this stage.
         '''
-        new_add = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_add)
-        self._session.commit()
-        return new_add
+        try:
+            new_user = User(email=email, hashed_password=hashed_password)
+            self._session.add(new_user)
+            self._session.commit()
+        except Exception:
+            self._session.rollback()
+            new_user = None
+        return new_user
